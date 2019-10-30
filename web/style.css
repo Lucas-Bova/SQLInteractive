@@ -1,0 +1,14 @@
+.default-border {
+    border-width: 5px !important;
+    border-color: grey !important;
+}
+
+.success-border {
+    border-width: 5px !important;
+    border-color: green !important;
+}
+
+.fail-border {
+    border-width: 5px !important;
+    border-color: red !important;
+}

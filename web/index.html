@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+    <!-- local styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Angular app definition-->
+    <script src="app.js"></script>
+
+    <!-- Angular Contorl definiton -->
+    <script src="ctrl.js"></script>
+</head>
+<body>
+    <div class = "container" ng-app = "SqlApp">
+        <div class = "row" ng-controller="btnctrl">
+            <div class = "col-md-12 border {{borderStyle}}">
+                <h4>Return all data from the Students table. <span class="badge {{badgeState}} float-right">{{badgeText}}</span></h4>
+                <h6>(Press a button to add it to the query window. Press it again to remove it.)</h6>
+                <div class = "float-left p-0">
+                    <button type="button" value='*' ng-click="build($event.target.value)">*</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='Students' ng-click="build($event.target.value)">Students</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='SELECT' ng-click="build($event.target.value)">SELECT</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='FROM' ng-click="build($event.target.value)">FROM</button>  
+                </div> 
+                <input class="col-md-12" type="text" value={{query}} readonly />
+                <button class="col-md-12" type="button" ng-click="validate('SELECT * FROM Students')">Submit</button>
+                <table class="col-md-12 table-success table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Student_ID</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Age</th>
+                        <th>Grade</th>
+                        <th>Teacher_ID</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="x in result">
+                    <td>{{x.Student_ID}}</td>
+                    <td>{{x.FirstName}}</td>
+                    <td>{{x.LastName}}</td>
+                    <td>{{x.Age}}</td>
+                    <td>{{x.Grade}}</td>
+                    <td>{{x.Teacher_ID}}</td>
+                </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class = "row" ng-controller="btnctrl">
+            <div class = "col-md-12 border {{borderStyle}}">
+                <h4>Select each students first name and grade. <span class="badge {{badgeState}} float-right">{{badgeText}}</span></h4>
+                <h6>(Press a button to add it to the query window. Press it again to remove it.)</h6>
+                <div class = "float-left p-0">
+                    <button type="button" value='FirstName,' ng-click="build($event.target.value)">FirstName,</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='Grade' ng-click="build($event.target.value)">Grade</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='Students' ng-click="build($event.target.value)">Students</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='SELECT' ng-click="build($event.target.value)">SELECT</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='FROM' ng-click="build($event.target.value)">FROM</button>  
+                </div> 
+                <input class="col-md-12" type="text" value={{query}} readonly />
+                <button class="col-md-12" type="button" ng-click="validate('SELECT FirstName, Grade FROM Students')">Submit</button>
+                <table class="col-md-12 table-success table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>FirstName</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="x in result">
+                    <td>{{x.FirstName}}</td>
+                    <td>{{x.Grade}}</td>
+                </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class = "row" ng-controller="btnctrl">
+            <div class = "col-md-12 border {{borderStyle}}">
+                <h4>Select the last name and age for student number 2. <span class="badge {{badgeState}} float-right">{{badgeText}}</span></h4>
+                <h6>(Press a button to add it to the query window. Press it again to remove it.)</h6>
+                <div class = "float-left p-0">
+                    <button type="button" value='LastName,' ng-click="build($event.target.value)">LastName,</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='Age' ng-click="build($event.target.value)">Age</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='Students' ng-click="build($event.target.value)">Students</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='SELECT' ng-click="build($event.target.value)">SELECT</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='WHERE' ng-click="build($event.target.value)">WHERE</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='Student_ID = 2' ng-click="build($event.target.value)">Student_ID = 2</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='FROM' ng-click="build($event.target.value)">FROM</button>  
+                </div> 
+                <input class="col-md-12" type="text" value={{query}} readonly />
+                <button class="col-md-12" type="button" ng-click="validate('SELECT LastName, Age FROM Students WHERE Student_ID = 2')">Submit</button>
+                <table class="col-md-12 table-success table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>LastName</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="x in result">
+                    <td>{{x.LastName}}</td>
+                    <td>{{x.Age}}</td>
+                </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class = "row" ng-controller="btnctrl">
+            <div class = "col-md-12 border {{borderStyle}}">
+                <h4>Select all data for all students with a teacher_id of 100. <span class="badge {{badgeState}} float-right">{{badgeText}}</span></h4>
+                <h6>(Press a button to add it to the query window. Press it again to remove it.)</h6>
+                <div class = "float-left p-0">
+                    <button type="button" value='*' ng-click="build($event.target.value)">*</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='Students' ng-click="build($event.target.value)">Students</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='SELECT' ng-click="build($event.target.value)">SELECT</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='WHERE' ng-click="build($event.target.value)">WHERE</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='Teacher_ID = 100' ng-click="build($event.target.value)">ID = 100</button>  
+                </div> 
+                <div class = "float-left p-0">
+                    <button type="button" value='FROM' ng-click="build($event.target.value)">FROM</button>  
+                </div> 
+                <input class="col-md-12" type="text" value={{query}} readonly />
+                <button class="col-md-12" type="button" ng-click="validate('SELECT * FROM Students WHERE Teacher_ID = 100')">Submit</button>
+                <table class="col-md-12 table-success table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Student_ID</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Age</th>
+                        <th>Grade</th>
+                        <th>Teacher_ID</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="x in result">
+                    <td>{{x.Student_ID}}</td>
+                    <td>{{x.FirstName}}</td>
+                    <td>{{x.LastName}}</td>
+                    <td>{{x.Age}}</td>
+                    <td>{{x.Grade}}</td>
+                    <td>{{x.Teacher_ID}}</td>
+                </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
