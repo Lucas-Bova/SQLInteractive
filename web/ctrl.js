@@ -33,8 +33,16 @@ app.controller("btnctrl", ($scope, $http) => {
     }
 
     $scope.execute = (query) => {
+        var finished = false;
+        if (query == "SELECT Age, Student_ID, Grade FROM Students WHERE FirstName = \"Josh\"") {
+            finished = true;
+        }
         $http.post("http://SqlIntApi-env.9zmwbqfsmz.us-east-2.elasticbeanstalk.com/search", {"command": query})
         //.then((res) => res.data.json())
         .then((res) => {$scope.result = res.data;})
+
+        if (finished) {
+            alert("You did it!!! Nice Job!")
+        }
     }
   });
